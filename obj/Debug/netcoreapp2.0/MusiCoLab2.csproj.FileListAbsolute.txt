@@ -1,0 +1,11 @@
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\bin\Debug\netcoreapp2.0\MusiCoLab2.deps.json
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\bin\Debug\netcoreapp2.0\MusiCoLab2.runtimeconfig.json
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\bin\Debug\netcoreapp2.0\MusiCoLab2.runtimeconfig.dev.json
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\bin\Debug\netcoreapp2.0\MusiCoLab2.dll
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\bin\Debug\netcoreapp2.0\MusiCoLab2.pdb
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.csproj.CoreCompileInputs.cache
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.AssemblyInfoInputs.cache
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.AssemblyInfo.cs
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.dll
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.pdb
+C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.csprojResolveAssemblyReference.cache
