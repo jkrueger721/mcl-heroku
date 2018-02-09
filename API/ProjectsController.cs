@@ -12,8 +12,8 @@ namespace MusiCoLab2.API
     [Route("api/[controller]")]
     public class ProjectsController : Controller
     {
-        private ProjectService _service;
-        public ProjectsController(ProjectService service)
+        private IProjectService _service;
+        public ProjectsController(IProjectService service)
         {
             _service = service;
         }
