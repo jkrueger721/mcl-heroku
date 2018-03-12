@@ -26,7 +26,7 @@ namespace MusiCoLab2.API
         }
 
         // GET api/values/5
-        [HttpGet("{id}", Name = "GetProejct")]
+        [HttpGet("{id}", Name = "GetProject")]
         public IActionResult GetById(long id)
         {
             var item = _service.Find(id);
