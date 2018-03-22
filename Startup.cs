@@ -18,11 +18,7 @@ namespace MusiCoLab2
 {
     public class Startup
     {
-        //public static void Register(HttpConfiguration config)
-        //{
-        //    var corsAttr = new EnableCorsAttribute("*", "*", "*");
-        //    config.EnableCors(corsAttr);
-        //}
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder();
@@ -36,7 +32,14 @@ namespace MusiCoLab2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
             services.AddMvc();
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddEntityFrameworkSqlServer()
@@ -55,15 +58,11 @@ namespace MusiCoLab2
                 app.UseDeveloperExceptionPage();
             }
             // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors(builder =>
-
-               builder.AllowAnyOrigin()
-               
-               );
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseMvc(routes =>
             {
-                
+
                 routes.MapRoute(
                    name: "default",
                    template: "{controller}/{action=Index}/{id?}");

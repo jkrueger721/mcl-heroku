@@ -28,7 +28,7 @@ namespace MusiCoLab2.Services
         public Project Find(long id)
         {
             return _db.Projects.FirstOrDefault(project => project.Id == id);
-        }
+        } 
         public void Remove(long key)
         {
             var projectEntity = _db.Projects.First(course => course.Id == key);

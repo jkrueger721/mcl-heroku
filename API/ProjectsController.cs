@@ -40,6 +40,7 @@ namespace MusiCoLab2.API
         [HttpPost]
         public IActionResult Create([FromBody] Project item)
         {
+           
             if (item == null)
             {
                 return BadRequest();
@@ -47,7 +48,7 @@ namespace MusiCoLab2.API
 
             _service.Add(item);
 
-            return CreatedAtRoute("GetProject", item);
+            return CreatedAtAction("GetProject", new { id = item.Id });
         }
 
         // PUT api/values/5
