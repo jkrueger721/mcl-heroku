@@ -13,10 +13,14 @@ namespace MusiCoLab2.Migrations
                 name: "Projects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsPrivate = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Comments = table.Column<string>(nullable: true),
+                    Daw = table.Column<string>(nullable: true),
+                    Instruments = table.Column<string>(nullable: true),
+                    IsPrivate = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(maxLength: 20, nullable: false),
+                    Style = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,12 +31,12 @@ namespace MusiCoLab2.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
+                    Salt = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,25 +44,23 @@ namespace MusiCoLab2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectUsers",
+                name: "ProjectUser",
                 columns: table => new
                 {
-                    ProjectUserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    ProjectId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectUsers", x => x.ProjectUserId);
+                    table.PrimaryKey("PK_ProjectUser", x => new { x.ProjectId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_ProjectUsers_Projects_ProjectId",
+                        name: "FK_ProjectUser_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectUsers_Users_UserId",
+                        name: "FK_ProjectUser_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -66,20 +68,15 @@ namespace MusiCoLab2.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUsers_ProjectId",
-                table: "ProjectUsers",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectUsers_UserId",
-                table: "ProjectUsers",
+                name: "IX_ProjectUser_UserId",
+                table: "ProjectUser",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProjectUsers");
+                name: "ProjectUser");
 
             migrationBuilder.DropTable(
                 name: "Projects");

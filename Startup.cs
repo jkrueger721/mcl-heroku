@@ -11,8 +11,7 @@ using Microsoft.Extensions.Options;
 using MusiCoLab2.Services;
 using MusiCoLab2.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Web.Http.Cors;
-using System.Web.Http;
+
 
 namespace MusiCoLab2
 {

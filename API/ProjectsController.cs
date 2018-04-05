@@ -48,11 +48,17 @@ namespace MusiCoLab2.API
 
             _service.Add(item);
 
+            // get current user
+            // add new ProjectUser to database (include userId and projectId)
+           
+
+
             return CreatedAtAction("GetProject", new { id = item.Id });
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+       // [HttpPut("update/{id}/{projectUpdate}")]
+       [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] Project projectUpdate)
         {
             if (projectUpdate == null || projectUpdate.Id != id)

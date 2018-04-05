@@ -31,7 +31,7 @@ namespace MusiCoLab2.Services
         } 
         public void Remove(long key)
         {
-            var projectEntity = _db.Projects.First(course => course.Id == key);
+            var projectEntity = _db.Projects.First(project => project.Id == key);
             _db.Projects.Remove(projectEntity);
             _db.SaveChanges();
         }

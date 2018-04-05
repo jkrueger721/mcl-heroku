@@ -17,7 +17,7 @@ namespace MusiCoLab2.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MusiCoLab2.Models.Project", b =>
@@ -33,7 +33,9 @@ namespace MusiCoLab2.Migrations
 
                     b.Property<bool>("IsPrivate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.Property<string>("Style");
 
@@ -44,20 +46,15 @@ namespace MusiCoLab2.Migrations
 
             modelBuilder.Entity("MusiCoLab2.Models.ProjectUser", b =>
                 {
-                    b.Property<int>("ProjectUserId")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("ProjectId");
 
                     b.Property<int>("UserId");
 
-                    b.HasKey("ProjectUserId");
-
-                    b.HasIndex("ProjectId");
+                    b.HasKey("ProjectId", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectUsers");
+                    b.ToTable("ProjectUser");
                 });
 
             modelBuilder.Entity("MusiCoLab2.Models.User", b =>
@@ -81,12 +78,12 @@ namespace MusiCoLab2.Migrations
             modelBuilder.Entity("MusiCoLab2.Models.ProjectUser", b =>
                 {
                     b.HasOne("MusiCoLab2.Models.Project", "Project")
-                        .WithMany("Users")
+                        .WithMany("ProjectUsers")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusiCoLab2.Models.User", "User")
-                        .WithMany()
+                        .WithMany("ProjectUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
