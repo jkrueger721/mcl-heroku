@@ -1,4 +1,5 @@
 ﻿
+using MusiCoLab2.Modals;
 using MusiCoLab2.Models;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,28 @@ namespace MusiCoLab2.Services
             var projects = _db.Projects.ToList();
             return projects;
         }
-        public void Add(Project item)
+        public void Add(AddProjectVM vm)
         {
-            _db.Projects.Add(item);
+            //  _db.Projects.Add(vm.Project);
+            // _db.SaveChanges();
+
+            // ProjectUser projectUser = new ProjectUser();
+            // add project first
+            //projectUser.UserId = vm.UserId;
+            //projectUser.ProjectId = vm.Project.Id;
+            // find porject then add ProjectUser to that project
+            // use find on line 39
+            //var _project =  Find(projectUser.ProjectId);
+            //_project.ProjectUsers.Add(projectUser);
+            //_db.SaveChanges();
+           // Project project = new Project;
+            vm.Project.ProjectUsers = new List<ProjectUser> {
+                new ProjectUser { ProjectId = vm.Project.Id , UserId = vm.UserId }
+            };
+            _db.Projects.Add(vm.Project);
             _db.SaveChanges();
         }
+
         public Project Find(long id)
         {
             return _db.Projects.FirstOrDefault(project => project.Id == id);

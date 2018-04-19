@@ -13,10 +13,16 @@ namespace MusiCoLab2.Services
         {
             _db = db;
         }
-        public void Add(User user)
+        public void AddUser(User user)
         {
             _db.Users.Add(user);
             _db.SaveChanges();
         }
+        public void AddProjectUser(ProjectUser projectuser)
+        {
+            _db.Add(projectuser);
+            _db.SaveChanges();
+        }
+
     }
 }

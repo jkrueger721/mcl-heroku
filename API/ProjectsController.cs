@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusiCoLab2.Models;
 using MusiCoLab2.Services;
-
+using MusiCoLab2.Modals;
 
 namespace MusiCoLab2.API
 {
@@ -38,22 +38,27 @@ namespace MusiCoLab2.API
         }
         // POST api/values
         [HttpPost]
-        public IActionResult Create([FromBody] Project item)
+        public IActionResult Create([FromBody] AddProjectVM vm)
         {
            
-            if (item == null)
+            if (vm.Project == null || vm.UserId == 0)
             {
                 return BadRequest();
             }
-
-            _service.Add(item);
+            //ProjectUser projectUser = new ProjectUser();
+            
+            //projectUser.UserId = vm.UserId;
+            //projectUser.ProjectId = vm.Project.Id;
+            //vm.Project.ProjectUsers.Add(projectUser);
+            _service.Add(vm);
 
             // get current user
-            // add new ProjectUser to database (include userId and projectId)
            
+            // add new ProjectUser to database (include userId and projectId)
+            //ProjectUser projectUser = new ProjectUser();
+           //   item.ProjectUsers.Add(projectUser);
 
-
-            return CreatedAtAction("GetProject", new { id = item.Id });
+            return CreatedAtAction("GetProject", new { id = vm.Project.Id });
         }
 
         // PUT api/values/5
