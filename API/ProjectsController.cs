@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusiCoLab2.Models;
 using MusiCoLab2.Services;
-
+using MusiCoLab2.Modals;
 
 namespace MusiCoLab2.API
 {
@@ -26,7 +26,7 @@ namespace MusiCoLab2.API
         }
 
         // GET api/values/5
-        [HttpGet("{id}", Name = "GetProejct")]
+        [HttpGet("{id}", Name = "GetProject")]
         public IActionResult GetById(long id)
         {
             var item = _service.Find(id);
@@ -38,20 +38,32 @@ namespace MusiCoLab2.API
         }
         // POST api/values
         [HttpPost]
-        public IActionResult Create([FromBody] Project item)
+        public IActionResult Create([FromBody] AddProjectVM vm)
         {
-            if (item == null)
+           
+            if (vm.Project == null || vm.UserId == 0)
             {
                 return BadRequest();
             }
+            //ProjectUser projectUser = new ProjectUser();
+            
+            //projectUser.UserId = vm.UserId;
+            //projectUser.ProjectId = vm.Project.Id;
+            //vm.Project.ProjectUsers.Add(projectUser);
+            _service.Add(vm);
 
-            _service.Add(item);
+            // get current user
+           
+            // add new ProjectUser to database (include userId and projectId)
+            //ProjectUser projectUser = new ProjectUser();
+           //   item.ProjectUsers.Add(projectUser);
 
-            return CreatedAtRoute("GetProject", item);
+            return CreatedAtAction("GetProject", new { id = vm.Project.Id });
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+       // [HttpPut("update/{id}/{projectUpdate}")]
+       [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] Project projectUpdate)
         {
             if (projectUpdate == null || projectUpdate.Id != id)
