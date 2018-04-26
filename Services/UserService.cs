@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusiCoLab2.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private UserContext _db;
         public UserService(UserContext db)

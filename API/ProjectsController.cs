@@ -14,7 +14,7 @@ namespace MusiCoLab2.API
     {
         private IProjectService _service;
         public ProjectsController(IProjectService service)
-        {
+        { 
             _service = service;
         }
         // GET: api/values

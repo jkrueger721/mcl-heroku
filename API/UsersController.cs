@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusiCoLab2.Models;
+using MusiCoLab2.Services;
+using MusiCoLab2.Modals;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace MusiCoLab2.Controllers
+namespace MusiCoLab2.API
 {
     [Route("api/[controller]")]
     public class UsersController : Controller
@@ -34,7 +36,7 @@ namespace MusiCoLab2.Controllers
         }
 
         // POST api/Users/register
-        [HttpPost("register")]
+        [HttpPost]
         public string Post([FromBody]User user)
         {
             User foundUser = context.Users.SingleOrDefault<User>(u => u.Username == user.Username);
