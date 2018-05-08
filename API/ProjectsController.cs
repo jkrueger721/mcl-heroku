@@ -14,7 +14,7 @@ namespace MusiCoLab2.API
     {
         private IProjectService _service;
         public ProjectsController(IProjectService service)
-        {
+        { 
             _service = service;
         }
         // GET: api/values
@@ -45,19 +45,11 @@ namespace MusiCoLab2.API
             {
                 return BadRequest();
             }
-            //ProjectUser projectUser = new ProjectUser();
             
-            //projectUser.UserId = vm.UserId;
-            //projectUser.ProjectId = vm.Project.Id;
-            //vm.Project.ProjectUsers.Add(projectUser);
             _service.Add(vm);
 
             // get current user
-           
             // add new ProjectUser to database (include userId and projectId)
-            //ProjectUser projectUser = new ProjectUser();
-           //   item.ProjectUsers.Add(projectUser);
-
             return CreatedAtAction("GetProject", new { id = vm.Project.Id });
         }
 

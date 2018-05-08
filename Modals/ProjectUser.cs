@@ -8,7 +8,7 @@ namespace MusiCoLab2.Models
 {
     public class ProjectUser
     {
-       // public int ProjectUserId { get; set; }
+      
         public int UserId { get; set; }
         public User User { get; set; }
 

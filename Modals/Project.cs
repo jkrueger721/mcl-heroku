@@ -28,6 +28,7 @@ namespace MusiCoLab2.Models
         public string Style { get; set; }
         public string Instruments { get; set; }
         public string Comments { get; set; }
+        public string AudioUrl { get; set; }
 
 
     }
