@@ -23,19 +23,7 @@ namespace MusiCoLab2.Services
         }
         public void Add(AddProjectVM vm)
         {
-            //  _db.Projects.Add(vm.Project);
-            // _db.SaveChanges();
-
-            // ProjectUser projectUser = new ProjectUser();
-            // add project first
-            //projectUser.UserId = vm.UserId;
-            //projectUser.ProjectId = vm.Project.Id;
-            // find porject then add ProjectUser to that project
-            // use find on line 39
-            //var _project =  Find(projectUser.ProjectId);
-            //_project.ProjectUsers.Add(projectUser);
-            //_db.SaveChanges();
-           // Project project = new Project;
+            
             vm.Project.ProjectUsers = new List<ProjectUser> {
                 new ProjectUser { ProjectId = vm.Project.Id , UserId = vm.UserId }
             };
