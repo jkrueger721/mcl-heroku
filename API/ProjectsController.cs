@@ -54,8 +54,9 @@ namespace MusiCoLab2.API
         }
 
         // PUT api/values/5
-       // [HttpPut("update/{id}/{projectUpdate}")]
-       [HttpPut("{id}")]
+        //[HttpPut("update/{id}/{projectUpdate}")]
+        //[HttpPut("{id}")]
+        [HttpPost]
         public IActionResult Update(long id, [FromBody] Project projectUpdate)
         {
             if (projectUpdate == null || projectUpdate.Id != id)
