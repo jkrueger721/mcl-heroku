@@ -14,7 +14,7 @@ namespace MusiCoLab2.API
     {
         private IProjectService _service;
         public ProjectsController(IProjectService service)
-        { 
+        {
             _service = service;
         }
         // GET: api/values
@@ -40,12 +40,12 @@ namespace MusiCoLab2.API
         [HttpPost]
         public IActionResult Create([FromBody] AddProjectVM vm)
         {
-           
+
             if (vm.Project == null || vm.UserId == 0)
             {
                 return BadRequest();
             }
-            
+
             _service.Add(vm);
 
             // get current user
@@ -56,7 +56,7 @@ namespace MusiCoLab2.API
         // PUT api/values/5
         //[HttpPut("update/{id}/{projectUpdate}")]
         //[HttpPut("{id}")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update(long id, [FromBody] Project projectUpdate)
         {
             if (projectUpdate == null || projectUpdate.Id != id)
@@ -70,7 +70,7 @@ namespace MusiCoLab2.API
                 return NotFound();
             }
 
-           // project.IsComplete = projectUpdate.IsComplete;
+            // project.IsComplete = projectUpdate.IsComplete;
             project.Name = projectUpdate.Name;
 
             _service.Update(project);

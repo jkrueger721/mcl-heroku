@@ -12,21 +12,22 @@ using MusiCoLab2.Modals;
 namespace MusiCoLab2.API
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UserController : Controller
 
     {
         private UserContext context;
 
-        public UsersController(UserContext context)
+        public UserController(UserContext context)
         {
             this.context = context;
         }
-        // GET: api/values
-        [HttpGet("test")]
-        public bool Get()
+
+        [HttpGet]
+        public String Get()
         {
-            return Auth.IsValidToken(Request.Headers["Authorization"]);
+            return "hello";
         }
+
 
         // GET api/values/5
         [HttpGet("{id}")]
