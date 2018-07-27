@@ -54,9 +54,7 @@ namespace MusiCoLab2.API
         }
 
         // PUT api/values/5
-        //[HttpPut("update/{id}/{projectUpdate}")]
-        //[HttpPut("{id}")]
-        [HttpPut]
+       [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] Project projectUpdate)
         {
             if (projectUpdate == null || projectUpdate.Id != id)
@@ -72,6 +70,12 @@ namespace MusiCoLab2.API
 
             // project.IsComplete = projectUpdate.IsComplete;
             project.Name = projectUpdate.Name;
+            project.Daw = projectUpdate.Daw;
+            project.Comments = projectUpdate.Comments;
+            project.AudioUrl = projectUpdate.AudioUrl;
+            project.Instruments = projectUpdate.Instruments;
+            project.IsPrivate = projectUpdate.IsPrivate;
+            project.Style = projectUpdate.Style;
 
             _service.Update(project);
             return new NoContentResult();
