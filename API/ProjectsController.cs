@@ -68,6 +68,19 @@ namespace MusiCoLab2.API
                 return NotFound();
             }
 
+            // create this block of code to check if project is private. If is private then 
+            // only original creater can update. 
+
+            //if (project.IsPrivate = true)
+            //try
+            //{
+                
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
             // project.IsComplete = projectUpdate.IsComplete;
             project.Name = projectUpdate.Name;
             project.Daw = projectUpdate.Daw;
