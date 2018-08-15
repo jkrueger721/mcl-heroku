@@ -41,6 +41,11 @@ namespace MusiCoLab2.Services
             _db.Projects.Remove(projectEntity);
             _db.SaveChanges();
         }
+        public void AddProjectUser(ProjectUser projectuser)
+        {
+            _db.Add(projectuser);
+            _db.SaveChanges();
+        }
         public void Update(Project item)
         {
             _db.Projects.Update(item);

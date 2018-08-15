@@ -6,5 +6,6 @@ namespace MusiCoLab2.Services
     {
         void AddProjectUser(ProjectUser projectuser);
         void AddUser(User user);
+        User Find(long id);
     }
 }

@@ -38,7 +38,7 @@ namespace MusiCoLab2.API
         }
         // POST api/values
         [HttpPost]
-        public IActionResult Create([FromBody] AddProjectVM vm)
+        public IActionResult Create( [FromBody] AddProjectVM vm)
         {
 
             if (vm.Project == null || vm.UserId == 0)
@@ -46,8 +46,8 @@ namespace MusiCoLab2.API
                 return BadRequest();
             }
 
-            _service.Add(vm);
-
+            _service.Add(vm); 
+            
             // get current user
             // add new ProjectUser to database (include userId and projectId)
             return CreatedAtAction("GetProject", new { id = vm.Project.Id });
@@ -55,7 +55,7 @@ namespace MusiCoLab2.API
 
         // PUT api/values/5
        [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Project projectUpdate)
+        public IActionResult Update(long id, [FromBody] Project projectUpdate, User user)
         {
             if (projectUpdate == null || projectUpdate.Id != id)
             {
@@ -68,20 +68,12 @@ namespace MusiCoLab2.API
                 return NotFound();
             }
 
-            // create this block of code to check if project is private. If is private then 
-            // only original creater can update. 
 
-            //if (project.IsPrivate = true)
-            //try
-            //{
-                
-            //}
-            //catch (Exception)
-            //{
+            ProjectUser projectUser = new ProjectUser();
+            projectUser.UserId = user.Id;
+            projectUser.ProjectId = project.Id;
+            _service.AddProjectUser(projectUser);
 
-            //    throw;
-            //}
-            // project.IsComplete = projectUpdate.IsComplete;
             project.Name = projectUpdate.Name;
             project.Daw = projectUpdate.Daw;
             project.Comments = projectUpdate.Comments;
