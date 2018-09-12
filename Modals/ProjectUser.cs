@@ -1,18 +1,17 @@
-﻿using MusiCoLab2.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusiCoLab2.Models
 {
     public class ProjectUser
     {
-      
+
         public int UserId { get; set; }
-        public User User { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
+
 
         public int ProjectId { get; set; }
-        public Project Project { get; set; }
+        [ForeignKey("ProjectId")]
+        public virtual Project Project { get; set; }
     }
 }

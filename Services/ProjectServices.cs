@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using MusiCoLab2.Modals;
 using MusiCoLab2.Models;
 using System;
@@ -43,7 +44,10 @@ namespace MusiCoLab2.Services
         }
         public void AddProjectUser(ProjectUser projectuser)
         {
-            _db.Add(projectuser);
+            var user = _db.Users.Include(u => u.ProjectUsers).FirstOrDefault(u => u.Id == projectuser.UserId);
+            user.ProjectUsers.Add(projectuser);
+
+            _db.Add(user);
             _db.SaveChanges();
         }
         public void Update(Project item)
