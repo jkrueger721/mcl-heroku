@@ -38,7 +38,7 @@ namespace MusiCoLab2.API
         }
         // POST api/values
         [HttpPost]
-        public IActionResult Create([FromBody] AddProjectVM vm)
+        public IActionResult Create( [FromBody] AddProjectVM vm)
         {
 
             if (vm.Project == null || vm.UserId == 0)
@@ -46,8 +46,8 @@ namespace MusiCoLab2.API
                 return BadRequest();
             }
 
-            _service.Add(vm);
-
+            _service.Add(vm); 
+            
             // get current user
             // add new ProjectUser to database (include userId and projectId)
             return CreatedAtAction("GetProject", new { id = vm.Project.Id });
@@ -55,27 +55,35 @@ namespace MusiCoLab2.API
 
         // PUT api/values/5
        [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Project projectUpdate)
+        public IActionResult Update(long id, [FromBody] UpdateProjectVM vm)
         {
-            if (projectUpdate == null || projectUpdate.Id != id)
+            if (vm.UpdatedProject == null || vm.UpdatedProject.Id != id)
+            {
+                return BadRequest();
+            } else if ( vm.UserId == 0 )
             {
                 return BadRequest();
             }
-
+           
             var project = _service.Find(id);
             if (project == null)
             {
                 return NotFound();
             }
 
-            // project.IsComplete = projectUpdate.IsComplete;
-            project.Name = projectUpdate.Name;
-            project.Daw = projectUpdate.Daw;
-            project.Comments = projectUpdate.Comments;
-            project.AudioUrl = projectUpdate.AudioUrl;
-            project.Instruments = projectUpdate.Instruments;
-            project.IsPrivate = projectUpdate.IsPrivate;
-            project.Style = projectUpdate.Style;
+
+            ProjectUser projectUser = new ProjectUser();
+            projectUser.UserId = vm.UserId;
+            projectUser.ProjectId = project.Id;
+            _service.AddProjectUser(projectUser);
+
+            project.Name = vm.UpdatedProject.Name;
+            project.Daw = vm.UpdatedProject.Daw;
+            project.Comments = vm.UpdatedProject.Comments;
+            project.AudioUrl = vm.UpdatedProject.AudioUrl;
+            project.Instruments = vm.UpdatedProject.Instruments;
+            project.IsPrivate = vm.UpdatedProject.IsPrivate;
+            project.Style = vm.UpdatedProject.Style;
 
             _service.Update(project);
             return new NoContentResult();
