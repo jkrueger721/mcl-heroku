@@ -46,11 +46,9 @@ namespace MusiCoLab2.Services
         {
             var user = _db.Users.Include(u => u.ProjectUsers).FirstOrDefault(u => u.Id == projectuser.UserId);
             user.ProjectUsers.Add(projectuser);
-
-            _db.Add(user);
             _db.SaveChanges();
         }
-        public void Update(Project item)
+        public void Update(Project ite m)
         {
             _db.Projects.Update(item);
             _db.SaveChanges();
