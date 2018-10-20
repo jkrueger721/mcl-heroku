@@ -71,11 +71,11 @@ namespace MusiCoLab2.API
                 return NotFound();
             }
 
-            ProjectUser projectUser = new ProjectUser();
-            projectUser.UserId = vm.UserId;
-            projectUser.ProjectId = project.Id;
+            //ProjectUser projectUser = new ProjectUser();
+            //projectUser.UserId = vm.UserId;
+            //projectUser.ProjectId = project.Id;
 
-            _service.AddProjectUser(projectUser);
+            //_service.AddProjectUser(projectUser);
 
             project.Name = vm.UpdatedProject.Name;
             project.Daw = vm.UpdatedProject.Daw;
