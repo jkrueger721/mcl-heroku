@@ -14,20 +14,17 @@ namespace MusiCoLab2.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.EnableSensitiveDataLogging();
+        //    // ...
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProjectUser>()
-                .HasKey(t => new { t.ProjectId, t.UserId });
 
-            modelBuilder.Entity<ProjectUser>()
-                .HasOne(pu => pu.User)
-                .WithMany(pu => pu.ProjectUsers)
-                .HasForeignKey(pu => pu.UserId);
-
-            modelBuilder.Entity<ProjectUser>()
-                .HasOne(pu => pu.Project)
-                .WithMany(pu => pu.ProjectUsers)
-                .HasForeignKey(pu => pu.ProjectId);
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.ProjectContributors)
+                .WithOne();
         }
     }
 }

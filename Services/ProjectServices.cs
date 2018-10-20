@@ -25,9 +25,9 @@ namespace MusiCoLab2.Services
         public void Add(AddProjectVM vm)
         {
 
-            vm.Project.ProjectUsers = new List<ProjectUser> {
-                new ProjectUser { ProjectId = vm.Project.Id , UserId = vm.UserId }
-            };
+            //vm.Project.ProjectUsers = new List<ProjectUser> {
+            //    new ProjectUser { ProjectId = vm.Project.Id , UserId = vm.UserId }
+            //};
             _db.Projects.Add(vm.Project);
             _db.SaveChanges();
         }
@@ -43,28 +43,28 @@ namespace MusiCoLab2.Services
             _db.SaveChanges();
         }
 
-        public void AddProjectUser(ProjectUser projectuser)
-        {
-            try
-            {
-                var user = _db.Users
-                    .Include(u => u.ProjectUsers)
-                    .FirstOrDefault(u => u.Id == projectuser.UserId);
+        //public void AddProjectUser(ProjectUser projectuser)
+        //{
+        //    try
+        //    {
+        //        var user = _db.Users
+        //            .Include(u => u.ProjectUsers)
+        //            .FirstOrDefault(u => u.Id == projectuser.UserId);
 
-                if (!user.ProjectUsers.Any(pu => pu.ProjectId == projectuser.ProjectId))
-                {
-                    user.ProjectUsers.Add(projectuser);
-                    _db.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("error" + e.Message);
+        //        if (!user.ProjectUsers.Any(pu => pu.ProjectId == projectuser.ProjectId))
+        //        {
+        //            user.ProjectUsers.Add(projectuser);
+        //            _db.SaveChanges();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("error" + e.Message);
                 
 
-            }
+        //    }
 
-        }
+        //}
         public void Update(Project item)
         {
             _db.Projects.Update(item);
