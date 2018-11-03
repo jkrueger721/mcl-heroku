@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MusiCoLab2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using MusiCoLab2.Services;
 using MusiCoLab2.Modals;
+using System;
 
 namespace MusiCoLab2.API
 {
     [Route("api/[controller]")]
     public class ProjectsController : Controller
     {
+       
         private IProjectService _service;
         public ProjectsController(IProjectService service)
         {
@@ -21,10 +18,11 @@ namespace MusiCoLab2.API
         [HttpGet]
         public IActionResult Get()
         {
+           
             var projects = _service.GetProjects();
             return Ok(projects);
         }
-
+      
         // GET api/values/5
         [HttpGet("{id}", Name = "GetProject")]
         public IActionResult GetById(long id)
@@ -45,11 +43,11 @@ namespace MusiCoLab2.API
             {
                 return BadRequest();
             }
-
+            
             _service.Add(vm); 
             
             // get current user
-            // add new ProjectUser to database (include userId and projectId)
+            
             return CreatedAtAction("GetProject", new { id = vm.Project.Id });
         }
 
@@ -71,11 +69,13 @@ namespace MusiCoLab2.API
                 return NotFound();
             }
 
-            //ProjectUser projectUser = new ProjectUser();
-            //projectUser.UserId = vm.UserId;
-            //projectUser.ProjectId = project.Id;
+            ProjectContributor projectContributor = new ProjectContributor();
+            projectContributor.UserId = vm.UserId;
+            projectContributor.ProjectId = vm.UpdatedProject.Id;
 
-            //_service.AddProjectUser(projectUser);
+            _service.AddProjectContributor(projectContributor);
+
+            
 
             project.Name = vm.UpdatedProject.Name;
             project.Daw = vm.UpdatedProject.Daw;
