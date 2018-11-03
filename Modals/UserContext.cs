@@ -1,7 +1,7 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-
+using MusiCoLab2.Modals;
 
 namespace MusiCoLab2.Models
 {
@@ -13,18 +13,29 @@ namespace MusiCoLab2.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.EnableSensitiveDataLogging();
-        //    // ...
-        //}
+        public DbSet<ProjectContributor> ProjectContributors { get; set; }
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Project>()
-                .HasMany(p => p.ProjectContributors)
-                .WithOne();
+                .HasOne(po => po.ProjectOwner);
+
+            modelBuilder.Entity<ProjectContributor>()
+             .HasKey(t => new { t.ProjectId, t.UserId });
+
+            modelBuilder.Entity<ProjectContributor>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.ProjectContributors)
+                .HasForeignKey(pt => pt.UserId);
+
+            modelBuilder.Entity<ProjectContributor>()
+                .HasOne(pt => pt.Project)
+                .WithMany(t => t.ProjectContributors)
+                .HasForeignKey(pt => pt.ProjectId);
+
+
+
+
         }
     }
 }
