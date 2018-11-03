@@ -12,21 +12,22 @@ using MusiCoLab2.Modals;
 namespace MusiCoLab2.API
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UserController : Controller
 
     {
         private UserContext context;
 
-        public UsersController(UserContext context)
+        public UserController(UserContext context)
         {
             this.context = context;
         }
-        // GET: api/values
-        [HttpGet("test")]
-        public bool Get()
+
+        [HttpGet]
+        public String Get()
         {
-            return Auth.IsValidToken(Request.Headers["Authorization"]);
+            return "hello";
         }
+
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -52,16 +53,21 @@ namespace MusiCoLab2.API
             return Auth.GenerateJWT(user);
         }
         [HttpPost("login")]
-        public string Login([FromBody] User user)
+        public IActionResult Login([FromBody] User user)
         {
             User foundUser = context.Users.SingleOrDefault<User>(
                 u => u.Username == user.Username && u.Password == Auth.Hash(user.Password, u.Salt)
                 );
             if (foundUser != null)
             {
-                return Auth.GenerateJWT(foundUser);
+                LoginVM vm = new LoginVM();
+                vm.Id = foundUser.Id;
+                vm.UserName = foundUser.Username;
+               // string id = foundUser.Id.ToString();
+                return Ok(vm);
+                //return Auth.GenerateJWT(foundUser);
             }
-            return "Username and password do not match";
+            return Ok("Username and password do not match");
         }
 
         // PUT api/values/5

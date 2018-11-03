@@ -11,9 +11,10 @@ using System;
 namespace MusiCoLab2.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20181023133055_Mtm")]
+    partial class Mtm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +31,7 @@ namespace MusiCoLab2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectContributors");
+                    b.ToTable("ProjectContributor");
                 });
 
             modelBuilder.Entity("MusiCoLab2.Models.Project", b =>
@@ -82,12 +83,12 @@ namespace MusiCoLab2.Migrations
             modelBuilder.Entity("MusiCoLab2.Modals.ProjectContributor", b =>
                 {
                     b.HasOne("MusiCoLab2.Models.Project", "Project")
-                        .WithMany("ProjectContributors")
+                        .WithMany("Contributors")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusiCoLab2.Models.User", "User")
-                        .WithMany("ProjectContributors")
+                        .WithMany("Projects")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

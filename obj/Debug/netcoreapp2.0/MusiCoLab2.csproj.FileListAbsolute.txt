@@ -8,4 +8,3 @@ C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\De
 C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.AssemblyInfo.cs
 C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.dll
 C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.pdb
-C:\Users\John\Documents\Visual Studio 2017\Projects\MusiCoLab2\MusiCoLab2\obj\Debug\netcoreapp2.0\MusiCoLab2.csprojResolveAssemblyReference.cache

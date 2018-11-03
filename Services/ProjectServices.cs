@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using MusiCoLab2.Modals;
 using MusiCoLab2.Models;
 using System;
@@ -23,22 +24,10 @@ namespace MusiCoLab2.Services
         }
         public void Add(AddProjectVM vm)
         {
-            //  _db.Projects.Add(vm.Project);
-            // _db.SaveChanges();
-
-            // ProjectUser projectUser = new ProjectUser();
-            // add project first
-            //projectUser.UserId = vm.UserId;
-            //projectUser.ProjectId = vm.Project.Id;
-            // find porject then add ProjectUser to that project
-            // use find on line 39
-            //var _project =  Find(projectUser.ProjectId);
-            //_project.ProjectUsers.Add(projectUser);
-            //_db.SaveChanges();
-           // Project project = new Project;
-            vm.Project.ProjectUsers = new List<ProjectUser> {
-                new ProjectUser { ProjectId = vm.Project.Id , UserId = vm.UserId }
-            };
+            vm.Project.ProjectContributors = new List<ProjectContributor>();
+            var user = _db.Users.FirstOrDefault( u => u.Id == vm.UserId);
+            vm.Project.ProjectOwner = user;
+           
             _db.Projects.Add(vm.Project);
             _db.SaveChanges();
         }
@@ -46,12 +35,31 @@ namespace MusiCoLab2.Services
         public Project Find(long id)
         {
             return _db.Projects.FirstOrDefault(project => project.Id == id);
-        } 
+        }
         public void Remove(long key)
         {
             var projectEntity = _db.Projects.First(project => project.Id == key);
             _db.Projects.Remove(projectEntity);
             _db.SaveChanges();
+        }
+        public void AddProjectContributor(ProjectContributor projectContributor)
+        {
+            
+            if(!_db.ProjectContributors.Any(pc => pc.UserId == projectContributor.UserId && pc.ProjectId == projectContributor.ProjectId))
+            {
+                _db.ProjectContributors.Add(projectContributor);
+            }
+            //var contributor = _db.Users.FirstOrDefault(u => u.Id == vm.UserId);
+            //var _project = _db.Projects.FirstOrDefault(p => p.Id == vm.UpdatedProject.Id);
+            //if (contributor != _project.ProjectOwner)
+            //{
+
+            //    _project.ProjectContributors.Add(contributor);
+
+
+            //    _db.Projects.Update(_project);
+            //    _db.SaveChanges();
+            //}
         }
         public void Update(Project item)
         {

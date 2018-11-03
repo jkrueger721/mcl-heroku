@@ -18,11 +18,10 @@ namespace MusiCoLab2.Services
             _db.Users.Add(user);
             _db.SaveChanges();
         }
-        public void AddProjectUser(ProjectUser projectuser)
+      
+        public User Find(long id)
         {
-            _db.Add(projectuser);
-            _db.SaveChanges();
+            return _db.Users.FirstOrDefault(user => user.Id == id);
         }
-
     }
 }

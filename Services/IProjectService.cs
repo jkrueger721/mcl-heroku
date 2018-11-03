@@ -11,5 +11,6 @@ namespace MusiCoLab2.Services
         List<Project> GetProjects();
         void Remove(long key);
         void Update(Project item);
+        void AddProjectContributor(ProjectContributor projectContributor);
     }
 }
