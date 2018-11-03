@@ -37,8 +37,7 @@ namespace MusiCoLab2
                     builder => builder
                     .WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .Build());
+                    .AllowAnyMethod());
             });
             services.AddMvc();
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
