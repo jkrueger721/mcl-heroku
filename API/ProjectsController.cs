@@ -91,15 +91,28 @@ namespace MusiCoLab2.API
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(ProjectDeleteVM vm)
         {
-            var project = _service.Find(id);
-            if (project == null)
+            var id = vm.ProjectDeleteItem.Id;
+            try
             {
-                return NotFound();
-            }
+                if (vm.UserId == vm.ProjectDeleteItem.ProjectOwner.Id)
+                {
+                    var project = _service.Find(id);
+                    if (project == null)
+                    {
+                        return NotFound();
+                    }
 
-            _service.Remove(id);
+                    _service.Remove(id);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
             return new NoContentResult();
         }
     }
