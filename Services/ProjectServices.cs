@@ -49,17 +49,6 @@ namespace MusiCoLab2.Services
             {
                 _db.ProjectContributors.Add(projectContributor);
             }
-            //var contributor = _db.Users.FirstOrDefault(u => u.Id == vm.UserId);
-            //var _project = _db.Projects.FirstOrDefault(p => p.Id == vm.UpdatedProject.Id);
-            //if (contributor != _project.ProjectOwner)
-            //{
-
-            //    _project.ProjectContributors.Add(contributor);
-
-
-            //    _db.Projects.Update(_project);
-            //    _db.SaveChanges();
-            //}
         }
         public void Update(Project item)
         {
