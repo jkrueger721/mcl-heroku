@@ -8,6 +8,7 @@ namespace MusiCoLab2.Services
     {
         void Add(AddProjectVM vm);
         Project Find(long id);
+        Project FindWithOwner(long id);
         List<Project> GetProjects();
         void Remove(long key);
         void Update(Project item);

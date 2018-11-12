@@ -8,8 +8,9 @@ namespace MusiCoLab2.Modals
 {
     public class ProjectDeleteVM
     {
-        public Project ProjectDeleteItem { get; set; }
-
         public int UserId { get; set; }
+        public Project DeleteProject { get; set; }
+
+       
     }
 }

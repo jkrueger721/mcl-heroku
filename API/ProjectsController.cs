@@ -2,6 +2,8 @@
 using MusiCoLab2.Services;
 using MusiCoLab2.Modals;
 using System;
+using MusiCoLab2.Models;
+using System.Collections.Generic;
 
 namespace MusiCoLab2.API
 {
@@ -16,11 +18,10 @@ namespace MusiCoLab2.API
         }
         // GET: api/values
         [HttpGet]
-        public IActionResult Get()
+        public List<Project> Get()
         {
-           
             var projects = _service.GetProjects();
-            return Ok(projects);
+            return projects;
         }
       
         // GET api/values/5
@@ -90,20 +91,22 @@ namespace MusiCoLab2.API
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(ProjectDeleteVM vm)
+        [HttpPost("{id}")]
+        public IActionResult Delete(long id, [FromBody] ProjectDeleteVM vm)
         {
-            var id = vm.ProjectDeleteItem.Id;
             try
             {
-                if (vm.UserId == vm.ProjectDeleteItem.ProjectOwner.Id)
-                {
-                    var project = _service.Find(id);
-                    if (project == null)
-                    {
-                        return NotFound();
-                    }
+                var project = _service.FindWithOwner(id);
 
+                
+
+                if (project == null)
+                {
+                    return NotFound();
+                }
+
+                if (vm.UserId == project.ProjectOwner.Id)
+                {
                     _service.Remove(id);
                 }
             }
@@ -112,8 +115,8 @@ namespace MusiCoLab2.API
 
                 throw;
             }
-           
-            return new NoContentResult();
+
+            return Content(id.ToString());
         }
     }
 }

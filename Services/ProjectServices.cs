@@ -36,6 +36,10 @@ namespace MusiCoLab2.Services
         {
             return _db.Projects.FirstOrDefault(project => project.Id == id);
         }
+        public Project FindWithOwner(long id)
+        {
+            return _db.Projects.Include("ProjectOwner").FirstOrDefault(project => project.Id == id);
+        }
         public void Remove(long key)
         {
             var projectEntity = _db.Projects.First(project => project.Id == key);
