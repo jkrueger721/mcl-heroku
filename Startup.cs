@@ -40,7 +40,10 @@ namespace MusiCoLab2
                     .AllowAnyMethod()
                     .Build());
             });
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<UserContext>(options =>

@@ -19,7 +19,11 @@ namespace MusiCoLab2.Services
 
         public List<Project> GetProjects()
         {
-            var projects = _db.Projects.ToList();
+            var projects = _db.Projects
+                .Include( p => p.ProjectOwner)
+                   // .ThenInclude(po => po.Id.ToString())
+               .Include( p => p.ProjectContributors)//.ThenInclude(pc => pc.)
+                .ToList();
             return projects;
         }
         public void Add(AddProjectVM vm)
