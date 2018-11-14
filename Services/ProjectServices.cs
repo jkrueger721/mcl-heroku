@@ -19,7 +19,11 @@ namespace MusiCoLab2.Services
 
         public List<Project> GetProjects()
         {
-            var projects = _db.Projects.ToList();
+            var projects = _db.Projects
+                .Include( p => p.ProjectOwner)
+                   // .ThenInclude(po => po.Id.ToString())
+               .Include( p => p.ProjectContributors)//.ThenInclude(pc => pc.)
+                .ToList();
             return projects;
         }
         public void Add(AddProjectVM vm)
@@ -36,6 +40,10 @@ namespace MusiCoLab2.Services
         {
             return _db.Projects.FirstOrDefault(project => project.Id == id);
         }
+        public Project FindWithOwner(long id)
+        {
+            return _db.Projects.Include("ProjectOwner").FirstOrDefault(project => project.Id == id);
+        }
         public void Remove(long key)
         {
             var projectEntity = _db.Projects.First(project => project.Id == key);
@@ -49,17 +57,6 @@ namespace MusiCoLab2.Services
             {
                 _db.ProjectContributors.Add(projectContributor);
             }
-            //var contributor = _db.Users.FirstOrDefault(u => u.Id == vm.UserId);
-            //var _project = _db.Projects.FirstOrDefault(p => p.Id == vm.UpdatedProject.Id);
-            //if (contributor != _project.ProjectOwner)
-            //{
-
-            //    _project.ProjectContributors.Add(contributor);
-
-
-            //    _db.Projects.Update(_project);
-            //    _db.SaveChanges();
-            //}
         }
         public void Update(Project item)
         {
