@@ -9,6 +9,7 @@ namespace MusiCoLab2.Models
 {
     public class User
     {
+        //Use Class
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
