@@ -3,23 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using MusiCoLab2.Models;
+using MySql.Data.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace MusiCoLab2.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20181023133055_Mtm")]
-    partial class Mtm
+    [Migration("20181205022322_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
             modelBuilder.Entity("MusiCoLab2.Modals.ProjectContributor", b =>
                 {
@@ -31,7 +29,7 @@ namespace MusiCoLab2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectContributor");
+                    b.ToTable("ProjectContributors");
                 });
 
             modelBuilder.Entity("MusiCoLab2.Models.Project", b =>
@@ -83,12 +81,12 @@ namespace MusiCoLab2.Migrations
             modelBuilder.Entity("MusiCoLab2.Modals.ProjectContributor", b =>
                 {
                     b.HasOne("MusiCoLab2.Models.Project", "Project")
-                        .WithMany("Contributors")
+                        .WithMany("ProjectContributors")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusiCoLab2.Models.User", "User")
-                        .WithMany("Projects")
+                        .WithMany("ProjectContributors")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

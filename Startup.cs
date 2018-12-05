@@ -47,7 +47,7 @@ namespace MusiCoLab2
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<UserContext>(options =>
                 {
-                    options.UseSqlServer(connection);
+                    options.UseMySQL(connection);
                 });
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IUserService, UserService>();

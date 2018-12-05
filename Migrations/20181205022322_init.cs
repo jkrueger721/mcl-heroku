@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace MusiCoLab2.Migrations
 {
-    public partial class Mtm : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +13,7 @@ namespace MusiCoLab2.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     Password = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true),
                     Salt = table.Column<string>(nullable: true),
@@ -30,7 +29,7 @@ namespace MusiCoLab2.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     AudioUrl = table.Column<string>(nullable: true),
                     Comments = table.Column<string>(nullable: true),
                     Daw = table.Column<string>(nullable: true),
@@ -52,7 +51,7 @@ namespace MusiCoLab2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectContributor",
+                name: "ProjectContributors",
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(nullable: false),
@@ -60,15 +59,15 @@ namespace MusiCoLab2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectContributor", x => new { x.ProjectId, x.UserId });
+                    table.PrimaryKey("PK_ProjectContributors", x => new { x.ProjectId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_ProjectContributor_Projects_ProjectId",
+                        name: "FK_ProjectContributors_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectContributor_Users_UserId",
+                        name: "FK_ProjectContributors_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -76,8 +75,8 @@ namespace MusiCoLab2.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectContributor_UserId",
-                table: "ProjectContributor",
+                name: "IX_ProjectContributors_UserId",
+                table: "ProjectContributors",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -89,7 +88,7 @@ namespace MusiCoLab2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProjectContributor");
+                name: "ProjectContributors");
 
             migrationBuilder.DropTable(
                 name: "Projects");
