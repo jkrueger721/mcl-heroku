@@ -35,7 +35,7 @@ namespace MusiCoLab2
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                    .WithOrigins("http://localhost:3000")
+                    .WithOrigins("http://localhost:8080")
                     .AllowAnyHeader()
                     .AllowAnyMethod());
             });
