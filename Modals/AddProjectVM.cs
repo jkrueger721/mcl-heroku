@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MusiCoLab2.Modals
 {
-    public class AddProjectVM:IProject
+    public class AddProjectVM
     {
+
         public int UserId { get; set; }
     }
 }

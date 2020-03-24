@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusiCoLab2.Modals
 {
-    public class ProjectDeleteVM:IProject
+    public class ProjectDeleteVM : Project
     {
         public int UserId { get; set; }
     }

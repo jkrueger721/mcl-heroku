@@ -6,12 +6,12 @@ namespace MusiCoLab2.Services
 {
     public interface IProjectService
     {
-        void Add(AddProjectVM vm);
-        IProject Find(long id);
-        IProject FindWithOwner(long id);
-        List<IProject> GetProjects();
+        void Add(Project vm, int UserId);
+        Project Find(long id);
+        Project FindWithOwner(long id);
+        List<Project> GetProjects();
         void Remove(long key);
-        void Update(IProject item);
+        void Update(Project item);
         void AddProjectContributor(ProjectContributor projectContributor);
     }
 }

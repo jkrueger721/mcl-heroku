@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MusiCoLab2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     public class ValuesController : Controller
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            return "Welcome to John Kruger's shitty app";
         }
 
         // GET api/values/5

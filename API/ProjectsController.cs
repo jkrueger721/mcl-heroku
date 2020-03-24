@@ -10,7 +10,7 @@ namespace MusiCoLab2.API
     [Route("api/[controller]")]
     public class ProjectsController : Controller
     {
-       
+
         private IProjectService _service;
         public ProjectsController(IProjectService service)
         {
@@ -18,12 +18,12 @@ namespace MusiCoLab2.API
         }
         // GET: api/values
         [HttpGet]
-        public List<IProject> Get()
+        public List<Project> Get()
         {
             var projects = _service.GetProjects();
             return projects;
         }
-      
+
         // GET api/values/5
         [HttpGet("{id}", Name = "GetProject")]
         public IActionResult GetById(long id)
@@ -37,33 +37,30 @@ namespace MusiCoLab2.API
         }
         // POST api/values
         [HttpPost]
-        public IActionResult Create( [FromBody] AddProjectVM vm)
+        public IActionResult Create([FromBody] Project vm)
         {
-
             // if (vm.Project == null || vm.UserId == 0)
             // {
             //     return BadRequest();
             // }
-            
-            _service.Add(vm); 
-             return CreatedAtAction("GetProject", new { id = vm.Id });
-            // get current user
-            
-            // return CreatedAtAction("GetProject", new { id = vm.Project.Id });
+
+            _service.Add(vm, 1);
+            return CreatedAtAction("GetProject", vm);
         }
 
         // PUT api/values/5
-       [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] UpdateProjectVM vm)
         {
             if (vm == null || vm.Id != id)
             {
                 return BadRequest();
-            } else if ( vm.UserId == 0 )
+            }
+            else if (vm.UserId == 0)
             {
                 return BadRequest();
             }
-           
+
             var project = _service.Find(id);
             if (project == null)
             {
@@ -76,7 +73,7 @@ namespace MusiCoLab2.API
 
             _service.AddProjectContributor(projectContributor);
 
-            
+
 
             project.Name = vm.Name;
             project.Daw = vm.Daw;
@@ -98,7 +95,7 @@ namespace MusiCoLab2.API
             {
                 var project = _service.FindWithOwner(id);
 
-                
+
 
                 if (project == null)
                 {

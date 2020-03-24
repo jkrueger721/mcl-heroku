@@ -17,32 +17,32 @@ namespace MusiCoLab2.Services
             _db = db;
         }
 
-        public List<IProject> GetProjects()
+        public List<Project> GetProjects()
         {
             var projects = _db.Projects
-                .Include( p => p.ProjectOwner)
-               .Include( p => p.ProjectContributors)
+                .Include(p => p.ProjectOwner)
+               .Include(p => p.ProjectContributors)
                 .ToList();
             return projects;
         }
-        public void Add(AddProjectVM vm)
+        public void Add(Project vm, int UserId)
         {
             vm.ProjectContributors = new List<ProjectContributor>();
-            var user = _db.Users.FirstOrDefault( u => u.Id == vm.UserId);
+            var user = _db.Users.FirstOrDefault(u => u.Id == UserId);
             vm.ProjectOwner = user;
-           
+
             _db.Projects.Add(vm);
             _db.SaveChanges();
         }
 
-        public IProject Find(long id)
+        public Project Find(long id)
         {
             return _db.Projects
                 .Include(p => p.ProjectOwner)
                .Include(p => p.ProjectContributors)
                .FirstOrDefault(project => project.Id == id);
         }
-        public IProject FindWithOwner(long id)
+        public Project FindWithOwner(long id)
         {
             return _db.Projects.Include("ProjectOwner").FirstOrDefault(project => project.Id == id);
         }
@@ -54,13 +54,13 @@ namespace MusiCoLab2.Services
         }
         public void AddProjectContributor(ProjectContributor projectContributor)
         {
-            
-            if(!_db.ProjectContributors.Any(pc => pc.UserId == projectContributor.UserId && pc.ProjectId == projectContributor.ProjectId))
+
+            if (!_db.ProjectContributors.Any(pc => pc.UserId == projectContributor.UserId && pc.ProjectId == projectContributor.ProjectId))
             {
                 _db.ProjectContributors.Add(projectContributor);
             }
         }
-        public void Update(IProject item)
+        public void Update(Project item)
         {
             _db.Projects.Update(item);
             _db.SaveChanges();
