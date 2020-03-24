@@ -8,25 +8,26 @@ using MusiCoLab2.Modals;
 
 namespace MusiCoLab2.Models
 {
-    public class Project
+    public interface IProject
+ 
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+         int Id { get; set; }
 
-        public string Name { get; set; }
-        public bool IsPrivate { get; set; }
-        public string Daw { get; set; }
-        public string Style { get; set; }
-        public string Instruments { get; set; }
-        public string Comments { get; set; }
-        public string AudioUrl { get; set; }
+         string Name { get; set; }
+         bool IsPrivate { get; set; }
+         string Daw { get; set; }
+         string Style { get; set; }
+         string Instruments { get; set; }
+         string Comments { get; set; }
+         string AudioUrl { get; set; }
 
         //[InverseProperty("Owner")]
-        public User ProjectOwner { get; set; }
+         User ProjectOwner { get; set; }
 
         //[InverseProperty("Contributor")]
-        public List<ProjectContributor> ProjectContributors { get; set; }
+         List<ProjectContributor> ProjectContributors { get; set; }
 
 
     }

@@ -17,7 +17,7 @@ namespace MusiCoLab2.Services
             _db = db;
         }
 
-        public List<Project> GetProjects()
+        public List<IProject> GetProjects()
         {
             var projects = _db.Projects
                 .Include( p => p.ProjectOwner)
@@ -27,22 +27,22 @@ namespace MusiCoLab2.Services
         }
         public void Add(AddProjectVM vm)
         {
-            vm.Project.ProjectContributors = new List<ProjectContributor>();
+            vm.ProjectContributors = new List<ProjectContributor>();
             var user = _db.Users.FirstOrDefault( u => u.Id == vm.UserId);
-            vm.Project.ProjectOwner = user;
+            vm.ProjectOwner = user;
            
-            _db.Projects.Add(vm.Project);
+            _db.Projects.Add(vm);
             _db.SaveChanges();
         }
 
-        public Project Find(long id)
+        public IProject Find(long id)
         {
             return _db.Projects
                 .Include(p => p.ProjectOwner)
                .Include(p => p.ProjectContributors)
                .FirstOrDefault(project => project.Id == id);
         }
-        public Project FindWithOwner(long id)
+        public IProject FindWithOwner(long id)
         {
             return _db.Projects.Include("ProjectOwner").FirstOrDefault(project => project.Id == id);
         }
@@ -60,7 +60,7 @@ namespace MusiCoLab2.Services
                 _db.ProjectContributors.Add(projectContributor);
             }
         }
-        public void Update(Project item)
+        public void Update(IProject item)
         {
             _db.Projects.Update(item);
             _db.SaveChanges();
