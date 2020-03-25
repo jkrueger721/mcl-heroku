@@ -50,28 +50,25 @@ namespace MusiCoLab2.API
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] UpdateProjectVM vm)
+        public Project Update(long id, [FromBody] UpdateProjectVM vm)
         {
-            if (vm == null || vm.Id != id)
-            {
-                return BadRequest();
-            }
-            else if (vm.UserId == 0)
-            {
-                return BadRequest();
-            }
+
+            // if (vm == null || vm.Id != id)
+            // {
+            //     return BadRequest();
+            // }
+            // else if (vm.UserId == 0)
+            // {
+            //     return BadRequest();
+            // }
 
             var project = _service.Find(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
 
-            ProjectContributor projectContributor = new ProjectContributor();
-            projectContributor.UserId = vm.UserId;
-            projectContributor.ProjectId = vm.Id;
+            // ProjectContributor projectContributor = new ProjectContributor();
+            // projectContributor.UserId = vm.UserId;
+            // projectContributor.ProjectId = vm.Id;
 
-            _service.AddProjectContributor(projectContributor);
+            // _service.AddProjectContributor(projectContributor);
 
 
 
@@ -84,7 +81,7 @@ namespace MusiCoLab2.API
             project.Style = vm.Style;
 
             _service.Update(project);
-            return new NoContentResult();
+            return project;
         }
 
         // DELETE api/values/5
